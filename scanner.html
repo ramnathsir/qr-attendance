@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+content="width=device-width, initial-scale=1.0">
 
 <title>QR Attendance System</title>
 
@@ -19,16 +19,32 @@
 }
 
 body{
+
   margin:0;
+
   min-height:100vh;
-  font-family:Arial, sans-serif;
-  color:#fff;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  color:white;
 
   background:
-    radial-gradient(circle at top left,#172554 0,#020617 35%),
-    radial-gradient(circle at bottom right,#064e3b 0,#020617 40%);
+    radial-gradient(
+      circle at top left,
+      #172554,
+      #020617 40%
+    ),
+
+    radial-gradient(
+      circle at bottom right,
+      #064e3b,
+      #020617 45%
+    );
 
   background-color:#020617;
+
 }
 
 
@@ -38,18 +54,23 @@ body{
 
 .header{
 
-  text-align:center;
-
   padding:25px 15px;
 
-  border-bottom:1px solid rgba(255,255,255,.1);
+  text-align:center;
 
-  background:rgba(2,6,23,.75);
+  background:
+    rgba(2,6,23,.8);
 
-  backdrop-filter:blur(15px);
+  border-bottom:
+    1px solid
+    rgba(96,165,250,.2);
+
+  backdrop-filter:
+    blur(18px);
 
   box-shadow:
-    0 0 25px rgba(59,130,246,.15);
+    0 0 30px
+    rgba(59,130,246,.2);
 
 }
 
@@ -59,11 +80,9 @@ body{
 
   font-size:28px;
 
-  color:#fff;
-
   text-shadow:
     0 0 8px #3b82f6,
-    0 0 20px rgba(59,130,246,.5);
+    0 0 20px #2563eb;
 
 }
 
@@ -106,26 +125,26 @@ body{
   background:
     rgba(15,23,42,.72);
 
-  border:1px solid
-    rgba(96,165,250,.22);
+  border:
+    1px solid
+    rgba(96,165,250,.25);
 
-  backdrop-filter:blur(18px);
+  backdrop-filter:
+    blur(18px);
 
   box-shadow:
 
     0 0 12px
-      rgba(59,130,246,.12),
+    rgba(59,130,246,.12),
 
     0 0 35px
-      rgba(59,130,246,.06);
+    rgba(59,130,246,.07);
 
 }
 
 .card h3{
 
   margin-top:0;
-
-  font-size:21px;
 
   color:#e0f2fe;
 
@@ -146,27 +165,18 @@ input{
 
   border-radius:13px;
 
-  border:1px solid
-    rgba(96,165,250,.35);
+  border:
+    1px solid
+    rgba(96,165,250,.4);
 
   outline:none;
 
   background:
-    rgba(2,6,23,.8);
+    rgba(2,6,23,.85);
 
   color:white;
 
   font-size:17px;
-
-  box-shadow:
-    inset 0 0 10px
-    rgba(59,130,246,.08);
-
-}
-
-input::placeholder{
-
-  color:#64748b;
 
 }
 
@@ -176,10 +186,10 @@ input:focus{
 
   box-shadow:
 
-    0 0 8px #0ea5e9,
+    0 0 10px #0ea5e9,
 
-    0 0 22px
-      rgba(14,165,233,.25);
+    0 0 25px
+    rgba(14,165,233,.3);
 
 }
 
@@ -210,8 +220,6 @@ button{
 
   cursor:pointer;
 
-  transition:.2s;
-
   background:
     linear-gradient(
       135deg,
@@ -221,45 +229,41 @@ button{
 
   box-shadow:
 
-    0 0 8px
-      rgba(37,99,235,.6),
+    0 0 10px
+    rgba(37,99,235,.6),
 
-    0 0 22px
-      rgba(6,182,212,.2);
+    0 0 25px
+    rgba(6,182,212,.25);
+
+  transition:.2s;
 
 }
 
 button:hover{
 
-  transform:translateY(-2px);
+  transform:
+    translateY(-2px);
 
   box-shadow:
 
-    0 0 12px
-      rgba(37,99,235,.8),
+    0 0 15px
+    rgba(37,99,235,.9),
 
-    0 0 30px
-      rgba(6,182,212,.35);
+    0 0 35px
+    rgba(6,182,212,.4);
 
 }
 
 button:active{
 
-  transform:scale(.98);
-
-}
-
-button:disabled{
-
-  opacity:.5;
-
-  cursor:not-allowed;
+  transform:
+    scale(.98);
 
 }
 
 
 /* =========================
-   BUTTON COLORS
+   BUTTON TYPES
 ========================= */
 
 .gray{
@@ -272,8 +276,8 @@ button:disabled{
     );
 
   box-shadow:
-    0 0 10px
-      rgba(100,116,139,.35);
+    0 0 12px
+    rgba(100,116,139,.35);
 
 }
 
@@ -288,11 +292,11 @@ button:disabled{
 
   box-shadow:
 
-    0 0 10px
-      rgba(239,68,68,.7),
+    0 0 12px
+    rgba(239,68,68,.7),
 
-    0 0 25px
-      rgba(239,68,68,.2);
+    0 0 30px
+    rgba(239,68,68,.25);
 
 }
 
@@ -320,20 +324,23 @@ button:disabled{
 
   padding:8px;
 
-  overflow:hidden;
-
   border-radius:20px;
 
-  border:2px solid #0ea5e9;
+  overflow:hidden;
 
   background:#020617;
 
+  border:
+    2px solid
+    #0ea5e9;
+
   box-shadow:
 
-    0 0 10px #0ea5e9,
+    0 0 10px
+    #0ea5e9,
 
-    0 0 30px
-      rgba(14,165,233,.3);
+    0 0 35px
+    rgba(14,165,233,.35);
 
 }
 
@@ -362,22 +369,19 @@ button:disabled{
 
   text-align:center;
 
-  font-size:15px;
-
-  line-height:1.5;
-
   color:#cbd5e1;
 
   background:
-    rgba(30,41,59,.7);
+    rgba(30,41,59,.75);
 
-  border:1px solid
+  border:
+    1px solid
     rgba(148,163,184,.15);
 
 }
 
 
-/* SUCCESS */
+/* GREEN */
 
 .success{
 
@@ -386,40 +390,20 @@ button:disabled{
   background:
     rgba(22,101,52,.25);
 
-  border-color:
-    rgba(34,197,94,.5);
+  border-color:#22c55e;
 
   box-shadow:
 
-    0 0 10px
-      rgba(34,197,94,.35),
+    0 0 12px
+    rgba(34,197,94,.5),
 
-    inset 0 0 15px
-      rgba(34,197,94,.05);
+    0 0 30px
+    rgba(34,197,94,.15);
 
 }
 
 
-/* ERROR */
-
-.error{
-
-  color:#fca5a5;
-
-  background:
-    rgba(127,29,29,.25);
-
-  border-color:
-    rgba(239,68,68,.5);
-
-  box-shadow:
-    0 0 10px
-      rgba(239,68,68,.3);
-
-}
-
-
-/* WARNING */
+/* YELLOW */
 
 .warning{
 
@@ -428,18 +412,37 @@ button:disabled{
   background:
     rgba(120,53,15,.25);
 
-  border-color:
-    rgba(245,158,11,.5);
+  border-color:#f59e0b;
 
   box-shadow:
-    0 0 10px
-      rgba(245,158,11,.3);
+
+    0 0 12px
+    rgba(245,158,11,.5);
+
+}
+
+
+/* RED */
+
+.error{
+
+  color:#fca5a5;
+
+  background:
+    rgba(127,29,29,.25);
+
+  border-color:#ef4444;
+
+  box-shadow:
+
+    0 0 12px
+    rgba(239,68,68,.5);
 
 }
 
 
 /* =========================
-   STUDENT CARD
+   STUDENT
 ========================= */
 
 .student{
@@ -451,20 +454,19 @@ button:disabled{
   border-radius:18px;
 
   background:
-    rgba(15,23,42,.8);
+    rgba(15,23,42,.85);
 
-  border:1px solid
-    rgba(56,189,248,.25);
+  border:
+    1px solid
+    rgba(56,189,248,.3);
 
   box-shadow:
 
-    0 0 15px
-      rgba(14,165,233,.15);
+    0 0 18px
+    rgba(14,165,233,.18);
 
 }
 
-
-/* PHOTO */
 
 .student img{
 
@@ -480,44 +482,45 @@ button:disabled{
 
   border-radius:16px;
 
-  border:2px solid #38bdf8;
-
-  background:#0f172a;
+  border:
+    2px solid
+    #38bdf8;
 
   box-shadow:
 
-    0 0 10px #0ea5e9,
+    0 0 10px
+    #0ea5e9,
 
     0 0 25px
-      rgba(14,165,233,.3);
+    rgba(14,165,233,.3);
 
 }
 
-
-/* STUDENT ROW */
 
 .student-row{
 
   display:flex;
 
-  justify-content:space-between;
+  justify-content:
+    space-between;
 
   gap:15px;
 
   padding:12px 4px;
 
-  border-bottom:1px solid
+  border-bottom:
+    1px solid
     rgba(148,163,184,.12);
 
-  font-size:16px;
-
 }
+
 
 .student-row span:first-child{
 
   color:#94a3b8;
 
 }
+
 
 .student-row span:last-child{
 
@@ -528,7 +531,9 @@ button:disabled{
 }
 
 
-/* PRESENT */
+/* =========================
+   PRESENT
+========================= */
 
 .present{
 
@@ -542,10 +547,12 @@ button:disabled{
 
   color:#86efac;
 
+  border:
+    1px solid
+    #22c55e;
+
   background:
     rgba(22,101,52,.25);
-
-  border:1px solid #22c55e;
 
   font-size:18px;
 
@@ -553,16 +560,18 @@ button:disabled{
 
   box-shadow:
 
-    0 0 10px
-      rgba(34,197,94,.6),
+    0 0 12px
+    rgba(34,197,94,.7),
 
     0 0 30px
-      rgba(34,197,94,.2);
+    rgba(34,197,94,.2);
 
 }
 
 
-/* ALREADY */
+/* =========================
+   ALREADY
+========================= */
 
 .already{
 
@@ -576,10 +585,12 @@ button:disabled{
 
   color:#fde68a;
 
+  border:
+    1px solid
+    #f59e0b;
+
   background:
     rgba(120,53,15,.25);
-
-  border:1px solid #f59e0b;
 
   font-size:18px;
 
@@ -587,23 +598,24 @@ button:disabled{
 
   box-shadow:
 
-    0 0 10px
-      rgba(245,158,11,.6);
+    0 0 12px
+    rgba(245,158,11,.7);
 
 }
 
 
 /* =========================
-   CLOSE BUTTON
+   CLOSE SECTION
 ========================= */
 
 .close-section{
 
-  margin-top:20px;
+  margin-top:22px;
 
   padding-top:18px;
 
-  border-top:1px solid
+  border-top:
+    1px solid
     rgba(148,163,184,.15);
 
 }
@@ -614,7 +626,7 @@ button:disabled{
 
   font-weight:bold;
 
-  margin-bottom:5px;
+  font-size:18px;
 
 }
 
@@ -631,43 +643,6 @@ button:disabled{
 
 
 /* =========================
-   LOADING
-========================= */
-
-.loading{
-
-  display:inline-block;
-
-  width:18px;
-
-  height:18px;
-
-  border:3px solid
-    rgba(255,255,255,.3);
-
-  border-top-color:white;
-
-  border-radius:50%;
-
-  animation:
-    spin .8s linear infinite;
-
-  vertical-align:middle;
-
-  margin-right:7px;
-
-}
-
-@keyframes spin{
-
-  to{
-    transform:rotate(360deg);
-  }
-
-}
-
-
-/* =========================
    MOBILE
 ========================= */
 
@@ -676,14 +651,6 @@ button:disabled{
   .header h2{
 
     font-size:22px;
-
-  }
-
-  .container{
-
-    width:94%;
-
-    margin:15px auto;
 
   }
 
@@ -697,7 +664,7 @@ button:disabled{
 
   .student-row{
 
-    font-size:15px;
+    font-size:14px;
 
   }
 
@@ -711,11 +678,17 @@ button:disabled{
 <body>
 
 
+<!-- HEADER -->
+
 <div class="header">
 
-  <h2>📷 QR Attendance System</h2>
+  <h2>
+    📷 QR Attendance System
+  </h2>
 
-  <p>Admin / Teacher Scanner</p>
+  <p>
+    Admin / Teacher Scanner
+  </p>
 
 </div>
 
@@ -730,11 +703,13 @@ button:disabled{
   class="card"
 >
 
-  <h3>🔐 Admin Login</h3>
+  <h3>
+    🔐 Admin Login
+  </h3>
 
   <p style="color:#94a3b8">
 
-    Admin PIN enter karke attendance scanner open karein.
+    Admin PIN enter karke scanner open karein.
 
   </p>
 
@@ -744,8 +719,12 @@ button:disabled{
     placeholder="Enter Admin PIN"
   >
 
-  <button onclick="login()">
+  <button
+    onclick="login()"
+  >
+
     🔐 Login & Continue
+
   </button>
 
   <div id="loginStatus"></div>
@@ -760,7 +739,10 @@ button:disabled{
   class="card hidden"
 >
 
-  <h3>📷 Scan Student QR</h3>
+  <h3>
+    📷 Scan Student QR
+  </h3>
+
 
   <div
     id="cameraStatus"
@@ -777,43 +759,55 @@ button:disabled{
 
 
   <button
-    id="startBtn"
     onclick="startScanner()"
   >
+
     📷 Start Camera
+
   </button>
 
 
   <button
-    id="stopBtn"
     class="gray"
     onclick="stopScanner()"
   >
+
     ⛔ Stop Camera
+
   </button>
 
 
   <div class="close-section">
 
     <div class="close-title">
-      ⚠️ Attendance Session
+
+      🔒 Attendance Session
+
     </div>
 
-    <p style="color:#94a3b8;font-size:14px">
+    <p
+      style="
+        color:#94a3b8;
+        font-size:14px;
+      "
+    >
 
-      Session complete hone ke baad hi
+      Session complete hone ke baad
       Close Attendance dabayein.
 
-      Isse sirf un students ko ABSENT kiya
-      jayega jinka aaj koi attendance record nahi hai.
+      Jo student aaj scan nahi hua
+      wahi ABSENT hoga.
 
     </p>
+
 
     <button
       class="red"
       onclick="closeAttendance()"
     >
+
       🔒 Close Attendance & Mark Absent
+
     </button>
 
   </div>
@@ -828,7 +822,9 @@ button:disabled{
   class="card hidden"
 >
 
-  <h3>👤 Student Details</h3>
+  <h3>
+    👤 Student Details
+  </h3>
 
   <div id="result"></div>
 
@@ -842,11 +838,11 @@ button:disabled{
 
 
 /*************************************************
- * CONFIG
+ * API URL
  *************************************************/
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbw53pUOmJLEHxIuhPrzVer8nGMnzpoxBnYVnMVN2nq5QhEpfrbPE3HZbgUg0aoH74gN/exec";
+"https://script.google.com/macros/s/AKfycbwhdubjQb7Pk-9WMXTrxwlDkZbFfXv7Dp-_PqdlH234Q3GC8MV3TdkL6JitlabHH9ER/exec";
 
 let adminPin = "";
 
@@ -883,18 +879,12 @@ function login(){
   }
 
 
-  showStatus(
-    "loginStatus",
-    "🔄 PIN verify ho raha hai...",
-    "warning"
-  );
+  const callback =
+    "login_" +
+    Date.now();
 
 
-  const callbackName =
-    "login_" + Date.now();
-
-
-  window[callbackName] =
+  window[callback] =
     function(result){
 
       if(
@@ -902,17 +892,22 @@ function login(){
         result.ok
       ){
 
-        adminPin = pin;
+        adminPin =
+          pin;
 
 
         document
-          .getElementById("loginCard")
+          .getElementById(
+            "loginCard"
+          )
           .classList
           .add("hidden");
 
 
         document
-          .getElementById("scannerCard")
+          .getElementById(
+            "scannerCard"
+          )
           .classList
           .remove("hidden");
 
@@ -937,7 +932,7 @@ function login(){
 
 
       delete window[
-        callbackName
+        callback
       ];
 
     };
@@ -948,7 +943,7 @@ function login(){
     {
       pin:pin
     },
-    callbackName
+    callback
   );
 
 }
@@ -977,7 +972,8 @@ async function startScanner(){
 
 
     const cameras =
-      await Html5Qrcode.getCameras();
+      await Html5Qrcode
+        .getCameras();
 
 
     if(
@@ -998,9 +994,14 @@ async function startScanner(){
 
     const backCamera =
       cameras.find(
-        camera =>
-          /back|rear|environment/i
-            .test(camera.label)
+        function(camera){
+
+          return /back|rear|environment/i
+            .test(
+              camera.label
+            );
+
+        }
       );
 
 
@@ -1090,8 +1091,10 @@ async function startScanner(){
 
     showStatus(
       "cameraStatus",
+
       "❌ Camera start nahi hua: " +
       error.message,
+
       "error"
     );
 
@@ -1187,17 +1190,19 @@ function processQR(
 
   showStatus(
     "cameraStatus",
+
     "🔍 QR detected — student verify ho raha hai...",
+
     "warning"
   );
 
 
-  const callbackName =
+  const callback =
     "attendance_" +
     Date.now();
 
 
-  window[callbackName] =
+  window[callback] =
     function(result){
 
       showAttendanceResult(
@@ -1232,7 +1237,7 @@ function processQR(
 
 
       delete window[
-        callbackName
+        callback
       ];
 
     };
@@ -1247,7 +1252,7 @@ function processQR(
       pin:
         adminPin
     },
-    callbackName
+    callback
   );
 
 }
@@ -1272,14 +1277,15 @@ function closeAttendance(){
 
   const confirmClose =
     confirm(
+
       "⚠️ Attendance close karni hai?\n\n" +
 
-      "PRESENT students ko change nahi kiya jayega.\n" +
+      "Jo PRESENT hain unko change nahi kiya jayega.\n\n" +
 
-      "Sirf un students ko ABSENT kiya jayega " +
-      "jinka aaj attendance record nahi hai.\n\n" +
+      "Sirf bina attendance wale students ABSENT honge.\n\n" +
 
-      "Kya continue karein?"
+      "Continue?"
+
     );
 
 
@@ -1292,17 +1298,19 @@ function closeAttendance(){
 
   showStatus(
     "cameraStatus",
+
     "⏳ Attendance close ho rahi hai...",
+
     "warning"
   );
 
 
-  const callbackName =
+  const callback =
     "close_" +
     Date.now();
 
 
-  window[callbackName] =
+  window[callback] =
     function(result){
 
       if(
@@ -1311,9 +1319,10 @@ function closeAttendance(){
       ){
 
         showStatus(
+
           "cameraStatus",
 
-          "✅ Attendance closed successfully. " +
+          "✅ Attendance Closed | " +
 
           "Present: " +
           result.presentCount +
@@ -1322,10 +1331,12 @@ function closeAttendance(){
           result.absentCount,
 
           "success"
+
         );
 
 
         alert(
+
           "Attendance Closed ✅\n\n" +
 
           "Present: " +
@@ -1333,6 +1344,7 @@ function closeAttendance(){
 
           "\nAbsent: " +
           result.absentCount
+
         );
 
       }
@@ -1340,6 +1352,7 @@ function closeAttendance(){
       else{
 
         showStatus(
+
           "cameraStatus",
 
           "❌ " +
@@ -1349,13 +1362,14 @@ function closeAttendance(){
           ),
 
           "error"
+
         );
 
       }
 
 
       delete window[
-        callbackName
+        callback
       ];
 
     };
@@ -1367,14 +1381,14 @@ function closeAttendance(){
       pin:
         adminPin
     },
-    callbackName
+    callback
   );
 
 }
 
 
 /*************************************************
- * SHOW ATTENDANCE RESULT
+ * SHOW RESULT
  *************************************************/
 
 function showAttendanceResult(
@@ -1402,21 +1416,26 @@ function showAttendanceResult(
   }
 
 
-  /* PRESENT */
+  /*
+   * PRESENT
+   */
 
   if(result.ok){
 
     showStatus(
+
       "cameraStatus",
 
       "✅ PRESENT — " +
       result.student.name,
 
       "success"
+
     );
 
 
     showStudent(
+
       result.student,
 
       result.date,
@@ -1424,6 +1443,7 @@ function showAttendanceResult(
       result.time,
 
       "PRESENT"
+
     );
 
 
@@ -1432,20 +1452,26 @@ function showAttendanceResult(
   }
 
 
-  /* DUPLICATE */
+  /*
+   * DUPLICATE
+   */
 
   if(result.duplicate){
 
     showStatus(
+
       "cameraStatus",
 
-      "⚠️ Attendance already marked today.",
+      "⚠️ ALREADY PRESENT — " +
+      result.student.name,
 
       "warning"
+
     );
 
 
     showStudent(
+
       result.student,
 
       result.date,
@@ -1453,6 +1479,7 @@ function showAttendanceResult(
       result.time,
 
       "ALREADY PRESENT"
+
     );
 
 
@@ -1461,9 +1488,12 @@ function showAttendanceResult(
   }
 
 
-  /* ERROR */
+  /*
+   * ERROR
+   */
 
   showStatus(
+
     "cameraStatus",
 
     "❌ " +
@@ -1473,13 +1503,14 @@ function showAttendanceResult(
     ),
 
     "error"
+
   );
 
 }
 
 
 /*************************************************
- * SHOW STUDENT
+ * STUDENT
  *************************************************/
 
 function showStudent(
@@ -1504,8 +1535,11 @@ function showStudent(
   ){
 
     statusHtml =
+
       `<div class="present">
+
         🟢 PRESENT
+
       </div>`;
 
   }
@@ -1513,8 +1547,11 @@ function showStudent(
   else{
 
     statusHtml =
+
       `<div class="already">
+
         🟡 ALREADY PRESENT
+
       </div>`;
 
   }
@@ -1523,11 +1560,21 @@ function showStudent(
   const photo =
     student.photoUrl
       ? `
+
         <img
-          src="${escapeHtml(student.photoUrl)}"
-          onerror="this.style.display='none';"
+
+          src="${escapeHtml(
+            student.photoUrl
+          )}"
+
+          onerror="
+            this.style.display='none';
+          "
+
           alt="Student Photo"
+
         >
+
       `
       : "";
 
@@ -1538,47 +1585,96 @@ function showStudent(
 
       ${photo}
 
-      <div class="student-row">
-        <span>Student ID</span>
-        <span>
-          ${escapeHtml(student.studentId)}
-        </span>
-      </div>
 
       <div class="student-row">
-        <span>Name</span>
+
         <span>
-          ${escapeHtml(student.name)}
+          Student ID
         </span>
+
+        <span>
+          ${escapeHtml(
+            student.studentId
+          )}
+        </span>
+
       </div>
 
-      <div class="student-row">
-        <span>Class</span>
-        <span>
-          ${escapeHtml(student.studentClass)}
-        </span>
-      </div>
 
       <div class="student-row">
-        <span>Roll No</span>
+
         <span>
-          ${escapeHtml(student.rollNo)}
+          Name
         </span>
+
+        <span>
+          ${escapeHtml(
+            student.name
+          )}
+        </span>
+
       </div>
 
-      <div class="student-row">
-        <span>Date</span>
-        <span>
-          ${escapeHtml(date)}
-        </span>
-      </div>
 
       <div class="student-row">
-        <span>Time</span>
+
         <span>
-          ${escapeHtml(time)}
+          Class
         </span>
+
+        <span>
+          ${escapeHtml(
+            student.studentClass
+          )}
+        </span>
+
       </div>
+
+
+      <div class="student-row">
+
+        <span>
+          Roll No
+        </span>
+
+        <span>
+          ${escapeHtml(
+            student.rollNo
+          )}
+        </span>
+
+      </div>
+
+
+      <div class="student-row">
+
+        <span>
+          Date
+        </span>
+
+        <span>
+          ${escapeHtml(
+            date
+          )}
+        </span>
+
+      </div>
+
+
+      <div class="student-row">
+
+        <span>
+          Time
+        </span>
+
+        <span>
+          ${escapeHtml(
+            time
+          )}
+        </span>
+
+      </div>
+
 
       ${statusHtml}
 
@@ -1596,7 +1692,7 @@ function showStudent(
 function jsonp(
   action,
   params,
-  callbackName
+  callback
 ){
 
   let url =
@@ -1607,7 +1703,7 @@ function jsonp(
     ) +
     "&callback=" +
     encodeURIComponent(
-      callbackName
+      callback
     );
 
 
@@ -1642,20 +1738,27 @@ function jsonp(
     function(){
 
       showStatus(
+
         "cameraStatus",
+
         "❌ Server se connection nahi hua.",
+
         "error"
+
       );
 
 
       if(
-        window[callbackName]
+        window[callback]
       ){
 
-        window[callbackName]({
+        window[callback]({
+
           ok:false,
+
           message:
             "Server connection failed."
+
         });
 
       }
@@ -1663,9 +1766,11 @@ function jsonp(
     };
 
 
-  document.body.appendChild(
-    script
-  );
+  document
+    .body
+    .appendChild(
+      script
+    );
 
 }
 
@@ -1675,14 +1780,14 @@ function jsonp(
  *************************************************/
 
 function showStatus(
-  elementId,
+  id,
   message,
   type
 ){
 
   const element =
     document.getElementById(
-      elementId
+      id
     );
 
 
@@ -1717,30 +1822,36 @@ function escapeHtml(
   return String(
     value ?? ""
   )
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&#039;"
-    );
+
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+
+  .replace(
+    /</g,
+    "&lt;"
+  )
+
+  .replace(
+    />/g,
+    "&gt;"
+  )
+
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+
+  .replace(
+    /'/g,
+    "&#039;"
+  );
 
 }
 
 </script>
 
 </body>
+
 </html>
