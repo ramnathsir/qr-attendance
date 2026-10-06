@@ -49,8 +49,6 @@ body{
   margin:18px auto;
 }
 
-/* CARD */
-
 .card{
   background:white;
   padding:20px;
@@ -63,9 +61,6 @@ body{
   margin-top:0;
   font-size:20px;
 }
-
-
-/* INPUT */
 
 input{
   width:100%;
@@ -81,9 +76,6 @@ input:focus{
   border-color:#2563eb;
 }
 
-
-/* BUTTON */
-
 button{
   width:100%;
   min-height:52px;
@@ -95,6 +87,7 @@ button{
   color:white;
   font-size:16px;
   font-weight:bold;
+  cursor:pointer;
 }
 
 button:active{
@@ -117,9 +110,6 @@ button:disabled{
   background:#16a34a;
 }
 
-
-/* SCANNER */
-
 #reader{
   width:100%;
   margin:15px auto;
@@ -132,9 +122,6 @@ button:disabled{
   height:auto !important;
   border-radius:15px;
 }
-
-
-/* STATUS */
 
 .status{
   padding:14px;
@@ -160,9 +147,6 @@ button:disabled{
   background:#fef3c7;
   color:#92400e;
 }
-
-
-/* STUDENT */
 
 .student{
   margin-top:18px;
@@ -202,15 +186,20 @@ button:disabled{
   font-size:18px;
 }
 
-
-/* HIDDEN */
+.already{
+  margin-top:15px;
+  padding:14px;
+  background:#fef3c7;
+  color:#92400e;
+  text-align:center;
+  border-radius:10px;
+  font-weight:bold;
+  font-size:18px;
+}
 
 .hidden{
   display:none;
 }
-
-
-/* MOBILE */
 
 @media(max-width:600px){
 
@@ -259,9 +248,9 @@ button:disabled{
 
 <div class="header">
 
-<h2>📷 QR Attendance System</h2>
+  <h2>📷 QR Attendance System</h2>
 
-<p>Admin Scanner</p>
+  <p>Admin Scanner</p>
 
 </div>
 
@@ -269,33 +258,33 @@ button:disabled{
 <div class="container">
 
 
-<!-- ADMIN LOGIN -->
+<!-- LOGIN -->
 
 <div
   id="loginCard"
   class="card"
 >
 
-<h3>🔐 Admin Login</h3>
+  <h3>🔐 Admin Login</h3>
 
-<p>
-Student QR me PIN nahi hota.
-Admin/Teacher sirf yahan PIN dalega.
-</p>
+  <p>
+    Student QR me PIN nahi hota.
+    Admin/Teacher sirf yahan PIN dalega.
+  </p>
 
-<input
-  id="pin"
-  type="password"
-  placeholder="Enter Admin PIN"
->
+  <input
+    id="pin"
+    type="password"
+    placeholder="Enter Admin PIN"
+  >
 
-<button
-  onclick="login()"
->
-Login & Continue
-</button>
+  <button
+    onclick="login()"
+  >
+    Login & Continue
+  </button>
 
-<div id="loginStatus"></div>
+  <div id="loginStatus"></div>
 
 </div>
 
@@ -307,50 +296,57 @@ Login & Continue
   class="card hidden"
 >
 
-<h3>📷 Scan Student QR</h3>
+  <h3>📷 Scan Student QR</h3>
 
-<div
-  id="cameraStatus"
-  class="status"
->
-Camera start karne ke liye
-button dabao.
+  <div
+    id="cameraStatus"
+    class="status"
+  >
+    Camera start karne ke liye
+    button dabao.
+  </div>
+
+
+  <div id="reader"></div>
+
+
+  <button
+    id="startBtn"
+    onclick="startScanner()"
+  >
+    📷 Start Camera
+  </button>
+
+
+  <button
+    id="stopBtn"
+    class="gray"
+    onclick="stopScanner()"
+  >
+    ⛔ Stop Camera
+  </button>
+
+
+  <button
+    class="red"
+    onclick="closeAttendance()"
+  >
+    🔒 Close Attendance & Mark Absent
+  </button>
+
 </div>
 
 
-<div id="reader"></div>
-
-
-<button
-  id="startBtn"
-  onclick="startScanner()"
->
-📷 Start Camera
-</button>
-
-
-<button
-  id="stopBtn"
-  class="gray"
-  onclick="stopScanner()"
->
-⛔ Stop Camera
-</button>
-
-
-</div>
-
-
-<!-- STUDENT RESULT -->
+<!-- RESULT -->
 
 <div
   id="resultCard"
   class="card hidden"
 >
 
-<h3>👤 Student Details</h3>
+  <h3>👤 Student Details</h3>
 
-<div id="result"></div>
+  <div id="result"></div>
 
 </div>
 
@@ -365,15 +361,8 @@ button dabao.
    CONFIG
 ========================================= */
 
-
-/*
-   YAHAN APNA APPS SCRIPT WEB APP /exec URL
-   DALO
-*/
-
 const API_URL =
-"https://script.google.com/macros/s/AKfycbyCGawGoEMaGdwhjp-i8mHr1a2sBsaUmk6Bvt9oVS8gxaE6RwuVkbBaVdNVg7uqTRqG/exec";
-
+"https://script.google.com/macros/s/AKfycbzvbXPrZjmKNNaq55w5zK7SEN8LAWLHUISyTB7mpG5kQyiHKNDtkoTZ2wxdbTdDpEt7/exec";
 
 /* =========================================
    VARIABLES
@@ -392,7 +381,7 @@ let processing = false;
    LOGIN
 ========================================= */
 
-async function login(){
+function login(){
 
   const pin =
     document
@@ -410,7 +399,6 @@ async function login(){
     );
 
     return;
-
   }
 
 
@@ -421,10 +409,6 @@ async function login(){
   );
 
 
-  /*
-     Pehle Apps Script se PIN verify
-  */
-
   const callbackName =
     "loginCallback_" +
     Date.now();
@@ -433,7 +417,10 @@ async function login(){
   window[callbackName] =
     function(result){
 
-      if(result && result.ok){
+      if(
+        result &&
+        result.ok
+      ){
 
         adminPin = pin;
 
@@ -496,6 +483,7 @@ async function login(){
         "error"
       );
 
+
       delete window[callbackName];
 
     };
@@ -517,23 +505,6 @@ async function startScanner(){
   }
 
 
-  if(
-    API_URL.includes(
-      "PASTE_YOUR_DEPLOYMENT_ID"
-    )
-  ){
-
-    showStatus(
-      "cameraStatus",
-      "⚠️ Pehle scanner.html me Apps Script Web App URL set karo.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
   try{
 
     showStatus(
@@ -542,10 +513,6 @@ async function startScanner(){
       "warning"
     );
 
-
-    /*
-      Camera detect
-    */
 
     const cameras =
       await Html5Qrcode.getCameras();
@@ -562,10 +529,6 @@ async function startScanner(){
 
     }
 
-
-    /*
-      Rear camera
-    */
 
     let cameraId =
       cameras[0].id;
@@ -590,19 +553,11 @@ async function startScanner(){
     }
 
 
-    /*
-      Scanner create
-    */
-
     scanner =
       new Html5Qrcode(
         "reader"
       );
 
-
-    /*
-      Start
-    */
 
     await scanner.start(
 
@@ -652,10 +607,7 @@ async function startScanner(){
 
       function(errorMessage){
 
-        /*
-          QR detect nahi hua.
-          Ye normal hai.
-        */
+        // Normal QR scanning error
 
       }
 
@@ -749,10 +701,6 @@ function processQR(
   }
 
 
-  /*
-     QR se sirf Student ID chahiye
-  */
-
   const studentId =
     String(decodedText || "")
       .trim();
@@ -766,19 +714,19 @@ function processQR(
   processing = true;
 
 
-  /*
-     Camera temporarily pause
-  */
-
   if(
     scanner &&
     scanning
   ){
 
     try{
+
       scanner.pause(true);
+
     }
+
     catch(e){}
+
   }
 
 
@@ -788,10 +736,6 @@ function processQR(
     "warning"
   );
 
-
-  /*
-     Student data API
-  */
 
   const callbackName =
     "attendanceCallback_" +
@@ -818,8 +762,11 @@ function processQR(
           function(){
 
             try{
+
               scanner.resume();
+
             }
+
             catch(e){}
 
           },
@@ -876,8 +823,11 @@ function processQR(
       ){
 
         try{
+
           scanner.resume();
+
         }
+
         catch(e){}
 
       }
@@ -885,8 +835,7 @@ function processQR(
     };
 
 
-  document
-    .body
+  document.body
     .appendChild(script);
 
 }
@@ -915,13 +864,10 @@ function showAttendanceResult(
     );
 
     return;
-
   }
 
 
-  /*
-     SUCCESS
-  */
+  /* PRESENT */
 
   if(result.ok){
 
@@ -946,9 +892,7 @@ function showAttendanceResult(
   }
 
 
-  /*
-     DUPLICATE
-  */
+  /* DUPLICATE */
 
   if(result.duplicate){
 
@@ -972,9 +916,7 @@ function showAttendanceResult(
   }
 
 
-  /*
-     ERROR
-  */
+  /* ERROR */
 
   showStatus(
     "cameraStatus",
@@ -985,6 +927,129 @@ function showAttendanceResult(
     ),
     "error"
   );
+
+}
+
+
+/* =========================================
+   CLOSE ATTENDANCE
+========================================= */
+
+function closeAttendance(){
+
+  if(!adminPin){
+
+    alert(
+      "Please login first."
+    );
+
+    return;
+
+  }
+
+
+  const confirmClose =
+    confirm(
+      "Attendance close karna hai?\n\n" +
+      "Jo students scan nahi hue hain " +
+      "unko ABSENT mark kiya jayega."
+    );
+
+
+  if(!confirmClose){
+
+    return;
+
+  }
+
+
+  showStatus(
+    "cameraStatus",
+    "⏳ Attendance close ho rahi hai...",
+    "warning"
+  );
+
+
+  const callbackName =
+    "closeAttendanceCallback_" +
+    Date.now();
+
+
+  window[callbackName] =
+    function(result){
+
+      if(
+        result &&
+        result.ok
+      ){
+
+        showStatus(
+          "cameraStatus",
+          "✅ Attendance Closed — " +
+          result.absentCount +
+          " students ABSENT.",
+          "success"
+        );
+
+
+        alert(
+          "Attendance Closed Successfully!\n\n" +
+          "Absent Students: " +
+          result.absentCount
+        );
+
+      }
+
+      else{
+
+        showStatus(
+          "cameraStatus",
+          "❌ " +
+          (
+            result?.message ||
+            "Attendance close nahi hui."
+          ),
+          "error"
+        );
+
+      }
+
+
+      delete window[callbackName];
+
+    };
+
+
+  const script =
+    document.createElement("script");
+
+
+  script.src =
+    API_URL +
+    "?action=closeAttendance" +
+    "&pin=" +
+    encodeURIComponent(adminPin) +
+    "&callback=" +
+    callbackName;
+
+
+  script.onerror =
+    function(){
+
+      showStatus(
+        "cameraStatus",
+        "❌ Server response nahi mila.",
+        "error"
+      );
+
+
+      delete window[callbackName];
+
+    };
+
+
+  document.body
+    .appendChild(script);
 
 }
 
@@ -1006,17 +1071,56 @@ function showStudent(
     );
 
 
-  const photo =
+  let photo = "";
+
+
+  if(
     student.photoUrl
-      ? `
-        <img
-          src="${escapeHtml(
-            student.photoUrl
-          )}"
-          alt="Student Photo"
-        >
-      `
-      : "";
+  ){
+
+    photo = `
+
+      <img
+        src="${escapeHtml(
+          student.photoUrl
+        )}"
+        alt="Student Photo"
+        onerror="this.style.display='none';"
+      >
+
+    `;
+
+  }
+
+
+  let statusHTML;
+
+
+  if(
+    status === "PRESENT"
+  ){
+
+    statusHTML = `
+
+      <div class="present">
+        ✅ PRESENT
+      </div>
+
+    `;
+
+  }
+
+  else{
+
+    statusHTML = `
+
+      <div class="already">
+        ⚠️ ALREADY PRESENT
+      </div>
+
+    `;
+
+  }
 
 
   result.innerHTML = `
@@ -1025,53 +1129,68 @@ function showStudent(
 
       ${photo}
 
+
       <div class="student-row">
+
         <b>Name:</b>
         ${escapeHtml(
           student.name
         )}
+
       </div>
 
+
       <div class="student-row">
+
         <b>Student ID:</b>
         ${escapeHtml(
           student.studentId
         )}
+
       </div>
 
+
       <div class="student-row">
+
         <b>Class:</b>
         ${escapeHtml(
           student.studentClass
         )}
+
       </div>
 
+
       <div class="student-row">
+
         <b>Roll No:</b>
         ${escapeHtml(
           student.rollNo
         )}
+
       </div>
 
+
       <div class="student-row">
+
         <b>Date:</b>
         ${escapeHtml(
           date || "-"
         )}
+
       </div>
 
+
       <div class="student-row">
+
         <b>Time:</b>
         ${escapeHtml(
           time || "-"
         )}
+
       </div>
 
-      <div class="present">
-        ${status === "PRESENT"
-          ? "✅ PRESENT"
-          : "⚠️ ALREADY PRESENT"}
-      </div>
+
+      ${statusHTML}
 
     </div>
 
