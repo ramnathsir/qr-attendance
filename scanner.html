@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
+
+<title>QR Scanner</title>
+
+
+<script src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js">
+</script>
+
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+
+  margin:0;
+
+  font-family:Arial;
+
+  background:#f3f6fb;
+
+}
+
+.header{
+
+  background:#111827;
+
+  color:white;
+
+  text-align:center;
+
+  padding:18px;
+
+}
+
+.container{
+
+  width:94%;
+
+  max-width:600px;
+
+  margin:15px auto;
+
+}
+
+.card{
+
+  background:white;
+
+  padding:18px;
+
+  border-radius:16px;
+
+  box-shadow:0 5px 18px #0001;
+
+}
+
+#reader{
+
+  width:100%;
+
+  margin-top:15px;
+
+}
+
+#reader video{
+
+  width:100% !important;
+
+  border-radius:12px;
+
+}
+
+button{
+
+  width:100%;
+
+  padding:15px;
+
+  margin-top:12px;
+
+  border:0;
+
+  border-radius:10px;
+
+  background:#2563eb;
+
+  color:white;
+
+  font-size:16px;
+
+}
+
+.status{
+
+  padding:12px;
+
+  margin-top:12px;
+
+  border-radius:10px;
+
+  background:#f3f4f6;
+
+}
+
+.success{
+
+  background:#dcfce7;
+
+  color:#166534;
+
+}
+
+.error{
+
+  background:#fee2e2;
+
+  color:#991b1b;
+
+}
+
+.student{
+
+  margin-top:15px;
+
+  padding:15px;
+
+  border-radius:12px;
+
+  background:#f9fafb;
+
+}
+
+.student img{
+
+  width:130px;
+
+  height:150px;
+
+  object-fit:cover;
+
+  display:block;
+
+  margin:auto;
+
+  border-radius:10px;
+
+}
+
+.row{
+
+  margin:9px 0;
+
+  font-size:16px;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="header">
+
+<h2>📷 QR Attendance</h2>
+
+<div>Student Scanner</div>
+
+</div>
+
+
+<div class="container">
+
+
+<div class="card">
+
+
+<h3>Scan Student QR</h3>
+
+
+<div id="status"
+     class="status">
+
+Camera start karne ke liye
+button dabao.
+
+</div>
+
+
+<div id="reader"></div>
+
+
+<button
+  id="startBtn"
+  onclick="startScanner()">
+
+📷 Start Camera
+
+</button>
+
+
+<button
+  id="stopBtn"
+  onclick="stopScanner()"
+  style="background:#4b5563">
+
+⛔ Stop Camera
+
+</button>
+
+
+<div id="student"></div>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+
+/* =================================
+   CONFIG
+================================= */
+
+
+/*
+  YAHAN APNE APPS SCRIPT WEB APP
+  KA /exec URL DALO
+*/
+
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbyCGawGoEMaGdwhjp-i8mHr1a2sBsaUmk6Bvt9oVS8gxaE6RwuVkbBaVdNVg7uqTRqG/exec";
+
+
+/* =================================
+   PIN
+================================= */
+
+const urlParams =
+  new URLSearchParams(
+    window.location.search
+  );
+
+
+const PIN =
+  urlParams.get("pin") || "";
+
+
+let scanner = null;
+
+let scanning = false;
+
+let processing = false;
+
+
+/* =================================
+   START CAMERA
+================================= */
+
+async function startScanner(){
+
+
+  if(scanning){
+
+    return;
+
+  }
+
+
+  try{
+
+
+    setStatus(
+      "Camera permission maang raha hai..."
+    );
+
+
+    /*
+      Camera list detect
+    */
+
+    const cameras =
+      await Html5Qrcode.getCameras();
+
+
+    if(
+      !cameras ||
+      cameras.length === 0
+    ){
+
+      throw new Error(
+        "Camera detect nahi hua."
+      );
+
+    }
+
+
+    /*
+      Back camera
+    */
+
+    let cameraId =
+      cameras[0].id;
+
+
+    const backCamera =
+      cameras.find(
+        function(camera){
+
+          return /back|rear|environment/i
+            .test(camera.label);
+
+        }
+      );
+
+
+    if(backCamera){
+
+      cameraId =
+        backCamera.id;
+
+    }
+
+
+    scanner =
+      new Html5Qrcode(
+        "reader"
+      );
+
+
+    await scanner.start(
+
+      cameraId,
+
+      {
+
+        fps:10,
+
+        qrbox:function(
+          width,
+          height
+        ){
+
+          const size =
+            Math.floor(
+              Math.min(
+                width,
+                height
+              ) * 0.70
+            );
+
+
+          return {
+
+            width:size,
+
+            height:size
+
+          };
+
+        }
+
+      },
+
+
+      function(decodedText){
+
+        processQR(
+          decodedText
+        );
+
+      },
+
+
+      function(error){
+
+        // QR not detected
+      }
+
+    );
+
+
+    scanning = true;
+
+
+    setStatus(
+      "🟢 Camera ON — QR scan karo.",
+      "success"
+    );
+
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+
+    setStatus(
+
+      "❌ Camera start nahi hua: " +
+      error.message,
+
+      "error"
+
+    );
+
+  }
+
+}
+
+
+/* =================================
+   STOP CAMERA
+================================= */
+
+async function stopScanner(){
+
+
+  if(
+    !scanner ||
+    !scanning
+  ){
+
+    return;
+
+  }
+
+
+  try{
+
+    await scanner.stop();
+
+    scanner.clear();
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+  }
+
+
+  scanner = null;
+
+  scanning = false;
+
+
+  setStatus(
+    "Camera stopped."
+  );
+
+}
+
+
+/* =================================
+   PROCESS QR
+================================= */
+
+function processQR(
+  studentId
+){
+
+
+  if(processing){
+
+    return;
+
+  }
+
+
+  processing = true;
+
+
+  studentId =
+    String(
+      studentId
+    ).trim();
+
+
+  setStatus(
+    "Student verify ho raha hai..."
+  );
+
+
+  /*
+    JSONP callback
+  */
+
+  const callbackName =
+    "qrCallback_" +
+    Date.now();
+
+
+  window[callbackName] =
+    function(result){
+
+      try{
+
+        showResult(
+          result
+        );
+
+      }
+
+      finally{
+
+        processing = false;
+
+        delete window[
+          callbackName
+        ];
+
+      }
+
+    };
+
+
+  const script =
+    document.createElement(
+      "script"
+    );
+
+
+  script.src =
+    API_URL +
+    "?action=attendance" +
+    "&studentId=" +
+    encodeURIComponent(
+      studentId
+    ) +
+    "&pin=" +
+    encodeURIComponent(
+      PIN
+    ) +
+    "&callback=" +
+    callbackName;
+
+
+  script.onerror =
+    function(){
+
+      setStatus(
+        "Server se response nahi mila.",
+        "error"
+      );
+
+      processing = false;
+
+    };
+
+
+  document
+    .body
+    .appendChild(script);
+
+
+  /*
+    QR scanner ko thoda pause
+  */
+
+  setTimeout(
+    function(){
+
+      if(
+        scanner &&
+        scanning
+      ){
+
+        scanner.pause(
+          true
+        );
+
+      }
+
+    },
+    100
+  );
+
+
+  setTimeout(
+    function(){
+
+      if(
+        scanner &&
+        scanning
+      ){
+
+        scanner.resume();
+
+      }
+
+    },
+    1800
+  );
+
+}
+
+
+/* =================================
+   SHOW RESULT
+================================= */
+
+function showResult(
+  result
+){
+
+
+  if(!result){
+
+    setStatus(
+      "Invalid response.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(result.ok){
+
+    setStatus(
+      "✅ PRESENT — " +
+      result.student.name,
+      "success"
+    );
+
+
+    showStudent(
+      result.student,
+      result.date,
+      result.time,
+      "PRESENT"
+    );
+
+    return;
+
+  }
+
+
+  if(result.duplicate){
+
+    setStatus(
+      "⚠️ Attendance already marked.",
+      ""
+    );
+
+
+    showStudent(
+      result.student,
+      result.date,
+      result.time,
+      "ALREADY PRESENT"
+    );
+
+    return;
+
+  }
+
+
+  setStatus(
+    "❌ " +
+    (result.message ||
+     "Student not found."),
+    "error"
+  );
+
+}
+
+
+/* =================================
+   SHOW STUDENT
+================================= */
+
+function showStudent(
+  student,
+  date,
+  time,
+  status
+){
+
+
+  const photo =
+    student.photoUrl
+      ? `<img src="${escapeHtml(
+          student.photoUrl
+        )}">`
+      : "";
+
+
+  document
+    .getElementById(
+      "student"
+    )
+    .innerHTML = `
+
+      <div class="student">
+
+        ${photo}
+
+        <div class="row">
+          <b>Name:</b>
+          ${escapeHtml(
+            student.name
+          )}
+        </div>
+
+        <div class="row">
+          <b>Student ID:</b>
+          ${escapeHtml(
+            student.studentId
+          )}
+        </div>
+
+        <div class="row">
+          <b>Class:</b>
+          ${escapeHtml(
+            student.studentClass
+          )}
+        </div>
+
+        <div class="row">
+          <b>Roll No:</b>
+          ${escapeHtml(
+            student.rollNo
+          )}
+        </div>
+
+        <div class="row">
+          <b>Date:</b>
+          ${escapeHtml(
+            date || "-"
+          )}
+        </div>
+
+        <div class="row">
+          <b>Time:</b>
+          ${escapeHtml(
+            time || "-"
+          )}
+        </div>
+
+        <div class="row">
+          <b>Status:</b>
+          <strong>
+            ${escapeHtml(
+              status
+            )}
+          </strong>
+        </div>
+
+      </div>
+
+  `;
+
+}
+
+
+/* =================================
+   STATUS
+================================= */
+
+function setStatus(
+  text,
+  type
+){
+
+  const el =
+    document.getElementById(
+      "status"
+    );
+
+
+  el.textContent =
+    text;
+
+
+  el.className =
+    "status " +
+    (type || "");
+
+}
+
+
+/* =================================
+   ESCAPE HTML
+================================= */
+
+function escapeHtml(
+  value
+){
+
+  return String(
+    value || ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
