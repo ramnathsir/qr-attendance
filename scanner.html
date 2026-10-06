@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
@@ -8,7 +8,7 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>QR Attendance Scanner</title>
+<title>QR Attendance System</title>
 
 <script src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 
@@ -20,218 +20,685 @@
 
 body{
   margin:0;
-  font-family:Arial,sans-serif;
-  background:#f3f6fb;
-  color:#111827;
+  min-height:100vh;
+  font-family:Arial, sans-serif;
+  color:#fff;
+
+  background:
+    radial-gradient(circle at top left,#172554 0,#020617 35%),
+    radial-gradient(circle at bottom right,#064e3b 0,#020617 40%);
+
+  background-color:#020617;
 }
 
+
+/* =========================
+   HEADER
+========================= */
+
 .header{
-  background:#111827;
-  color:white;
+
   text-align:center;
-  padding:20px 15px;
+
+  padding:25px 15px;
+
+  border-bottom:1px solid rgba(255,255,255,.1);
+
+  background:rgba(2,6,23,.75);
+
+  backdrop-filter:blur(15px);
+
+  box-shadow:
+    0 0 25px rgba(59,130,246,.15);
+
 }
 
 .header h2{
+
   margin:0;
-  font-size:24px;
+
+  font-size:28px;
+
+  color:#fff;
+
+  text-shadow:
+    0 0 8px #3b82f6,
+    0 0 20px rgba(59,130,246,.5);
+
 }
 
 .header p{
-  margin:7px 0 0;
-  font-size:14px;
-  color:#d1d5db;
+
+  margin:8px 0 0;
+
+  color:#94a3b8;
+
 }
+
+
+/* =========================
+   CONTAINER
+========================= */
 
 .container{
+
   width:94%;
+
   max-width:650px;
-  margin:18px auto;
+
+  margin:25px auto;
+
 }
 
+
+/* =========================
+   GLASS CARD
+========================= */
+
 .card{
-  background:white;
-  padding:20px;
-  border-radius:18px;
-  margin-bottom:18px;
-  box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+  padding:22px;
+
+  margin-bottom:20px;
+
+  border-radius:22px;
+
+  background:
+    rgba(15,23,42,.72);
+
+  border:1px solid
+    rgba(96,165,250,.22);
+
+  backdrop-filter:blur(18px);
+
+  box-shadow:
+
+    0 0 12px
+      rgba(59,130,246,.12),
+
+    0 0 35px
+      rgba(59,130,246,.06);
+
 }
 
 .card h3{
+
   margin-top:0;
-  font-size:20px;
+
+  font-size:21px;
+
+  color:#e0f2fe;
+
 }
 
+
+/* =========================
+   INPUT
+========================= */
+
 input{
+
   width:100%;
-  height:52px;
-  padding:12px 14px;
-  border:1px solid #d1d5db;
-  border-radius:10px;
-  font-size:17px;
+
+  height:55px;
+
+  padding:12px 15px;
+
+  border-radius:13px;
+
+  border:1px solid
+    rgba(96,165,250,.35);
+
   outline:none;
+
+  background:
+    rgba(2,6,23,.8);
+
+  color:white;
+
+  font-size:17px;
+
+  box-shadow:
+    inset 0 0 10px
+    rgba(59,130,246,.08);
+
+}
+
+input::placeholder{
+
+  color:#64748b;
+
 }
 
 input:focus{
-  border-color:#2563eb;
+
+  border-color:#38bdf8;
+
+  box-shadow:
+
+    0 0 8px #0ea5e9,
+
+    0 0 22px
+      rgba(14,165,233,.25);
+
 }
 
+
+/* =========================
+   BUTTON
+========================= */
+
 button{
+
   width:100%;
-  min-height:52px;
-  margin-top:10px;
-  padding:12px;
+
+  min-height:54px;
+
+  margin-top:11px;
+
+  padding:13px;
+
   border:0;
-  border-radius:10px;
-  background:#2563eb;
+
+  border-radius:13px;
+
   color:white;
+
   font-size:16px;
+
   font-weight:bold;
+
   cursor:pointer;
+
+  transition:.2s;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #06b6d4
+    );
+
+  box-shadow:
+
+    0 0 8px
+      rgba(37,99,235,.6),
+
+    0 0 22px
+      rgba(6,182,212,.2);
+
+}
+
+button:hover{
+
+  transform:translateY(-2px);
+
+  box-shadow:
+
+    0 0 12px
+      rgba(37,99,235,.8),
+
+    0 0 30px
+      rgba(6,182,212,.35);
+
 }
 
 button:active{
+
   transform:scale(.98);
+
 }
 
 button:disabled{
-  background:#9ca3af;
+
+  opacity:.5;
+
+  cursor:not-allowed;
+
 }
 
+
+/* =========================
+   BUTTON COLORS
+========================= */
+
 .gray{
-  background:#4b5563;
+
+  background:
+    linear-gradient(
+      135deg,
+      #334155,
+      #475569
+    );
+
+  box-shadow:
+    0 0 10px
+      rgba(100,116,139,.35);
+
 }
 
 .red{
-  background:#dc2626;
+
+  background:
+    linear-gradient(
+      135deg,
+      #dc2626,
+      #f43f5e
+    );
+
+  box-shadow:
+
+    0 0 10px
+      rgba(239,68,68,.7),
+
+    0 0 25px
+      rgba(239,68,68,.2);
+
 }
 
 .green{
-  background:#16a34a;
+
+  background:
+    linear-gradient(
+      135deg,
+      #059669,
+      #22c55e
+    );
+
 }
 
+
+/* =========================
+   SCANNER
+========================= */
+
 #reader{
+
   width:100%;
-  margin:15px auto;
+
+  margin:18px auto;
+
+  padding:8px;
+
   overflow:hidden;
-  border-radius:15px;
+
+  border-radius:20px;
+
+  border:2px solid #0ea5e9;
+
+  background:#020617;
+
+  box-shadow:
+
+    0 0 10px #0ea5e9,
+
+    0 0 30px
+      rgba(14,165,233,.3);
+
 }
 
 #reader video{
+
   width:100% !important;
+
   height:auto !important;
-  border-radius:15px;
+
+  border-radius:14px;
+
 }
+
+
+/* =========================
+   STATUS
+========================= */
 
 .status{
-  padding:14px;
-  margin-top:12px;
-  border-radius:10px;
-  background:#f3f4f6;
+
+  padding:15px;
+
+  margin-top:13px;
+
+  border-radius:13px;
+
   text-align:center;
+
   font-size:15px;
+
   line-height:1.5;
+
+  color:#cbd5e1;
+
+  background:
+    rgba(30,41,59,.7);
+
+  border:1px solid
+    rgba(148,163,184,.15);
+
 }
+
+
+/* SUCCESS */
 
 .success{
-  background:#dcfce7;
-  color:#166534;
+
+  color:#86efac;
+
+  background:
+    rgba(22,101,52,.25);
+
+  border-color:
+    rgba(34,197,94,.5);
+
+  box-shadow:
+
+    0 0 10px
+      rgba(34,197,94,.35),
+
+    inset 0 0 15px
+      rgba(34,197,94,.05);
+
 }
+
+
+/* ERROR */
 
 .error{
-  background:#fee2e2;
-  color:#991b1b;
+
+  color:#fca5a5;
+
+  background:
+    rgba(127,29,29,.25);
+
+  border-color:
+    rgba(239,68,68,.5);
+
+  box-shadow:
+    0 0 10px
+      rgba(239,68,68,.3);
+
 }
+
+
+/* WARNING */
 
 .warning{
-  background:#fef3c7;
-  color:#92400e;
+
+  color:#fde68a;
+
+  background:
+    rgba(120,53,15,.25);
+
+  border-color:
+    rgba(245,158,11,.5);
+
+  box-shadow:
+    0 0 10px
+      rgba(245,158,11,.3);
+
 }
+
+
+/* =========================
+   STUDENT CARD
+========================= */
 
 .student{
+
   margin-top:18px;
-  padding:18px;
-  background:#f9fafb;
-  border-radius:14px;
+
+  padding:20px;
+
+  border-radius:18px;
+
+  background:
+    rgba(15,23,42,.8);
+
+  border:1px solid
+    rgba(56,189,248,.25);
+
+  box-shadow:
+
+    0 0 15px
+      rgba(14,165,233,.15);
+
 }
+
+
+/* PHOTO */
 
 .student img{
-  width:140px;
-  height:160px;
+
+  width:145px;
+
+  height:165px;
+
   object-fit:cover;
+
   display:block;
-  margin:0 auto 15px;
-  border-radius:12px;
-  background:#e5e7eb;
+
+  margin:0 auto 18px;
+
+  border-radius:16px;
+
+  border:2px solid #38bdf8;
+
+  background:#0f172a;
+
+  box-shadow:
+
+    0 0 10px #0ea5e9,
+
+    0 0 25px
+      rgba(14,165,233,.3);
+
 }
+
+
+/* STUDENT ROW */
 
 .student-row{
-  padding:9px 0;
-  border-bottom:1px solid #e5e7eb;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  padding:12px 4px;
+
+  border-bottom:1px solid
+    rgba(148,163,184,.12);
+
   font-size:16px;
+
 }
 
-.student-row:last-child{
-  border-bottom:0;
+.student-row span:first-child{
+
+  color:#94a3b8;
+
 }
+
+.student-row span:last-child{
+
+  color:#e0f2fe;
+
+  font-weight:bold;
+
+}
+
+
+/* PRESENT */
 
 .present{
-  margin-top:15px;
-  padding:14px;
-  background:#dcfce7;
-  color:#166534;
+
+  margin-top:18px;
+
+  padding:15px;
+
   text-align:center;
-  border-radius:10px;
-  font-weight:bold;
+
+  border-radius:13px;
+
+  color:#86efac;
+
+  background:
+    rgba(22,101,52,.25);
+
+  border:1px solid #22c55e;
+
   font-size:18px;
+
+  font-weight:bold;
+
+  box-shadow:
+
+    0 0 10px
+      rgba(34,197,94,.6),
+
+    0 0 30px
+      rgba(34,197,94,.2);
+
 }
+
+
+/* ALREADY */
 
 .already{
-  margin-top:15px;
-  padding:14px;
-  background:#fef3c7;
-  color:#92400e;
+
+  margin-top:18px;
+
+  padding:15px;
+
   text-align:center;
-  border-radius:10px;
-  font-weight:bold;
+
+  border-radius:13px;
+
+  color:#fde68a;
+
+  background:
+    rgba(120,53,15,.25);
+
+  border:1px solid #f59e0b;
+
   font-size:18px;
+
+  font-weight:bold;
+
+  box-shadow:
+
+    0 0 10px
+      rgba(245,158,11,.6);
+
 }
 
-.hidden{
-  display:none;
+
+/* =========================
+   CLOSE BUTTON
+========================= */
+
+.close-section{
+
+  margin-top:20px;
+
+  padding-top:18px;
+
+  border-top:1px solid
+    rgba(148,163,184,.15);
+
 }
+
+.close-title{
+
+  color:#fca5a5;
+
+  font-weight:bold;
+
+  margin-bottom:5px;
+
+}
+
+
+/* =========================
+   HIDDEN
+========================= */
+
+.hidden{
+
+  display:none !important;
+
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.loading{
+
+  display:inline-block;
+
+  width:18px;
+
+  height:18px;
+
+  border:3px solid
+    rgba(255,255,255,.3);
+
+  border-top-color:white;
+
+  border-radius:50%;
+
+  animation:
+    spin .8s linear infinite;
+
+  vertical-align:middle;
+
+  margin-right:7px;
+
+}
+
+@keyframes spin{
+
+  to{
+    transform:rotate(360deg);
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:600px){
 
-  .header{
-    padding:16px 10px;
-  }
-
   .header h2{
-    font-size:21px;
+
+    font-size:22px;
+
   }
 
   .container{
+
     width:94%;
-    margin:12px auto;
+
+    margin:15px auto;
+
   }
 
   .card{
-    padding:15px;
-    border-radius:15px;
+
+    padding:16px;
+
+    border-radius:18px;
+
   }
 
-  .card h3{
-    font-size:18px;
-  }
+  .student-row{
 
-  #reader{
-    width:100%;
-  }
+    font-size:15px;
 
-  button{
-    min-height:54px;
-    font-size:16px;
   }
 
 }
@@ -244,13 +711,11 @@ button:disabled{
 <body>
 
 
-<!-- HEADER -->
-
 <div class="header">
 
   <h2>📷 QR Attendance System</h2>
 
-  <p>Admin Scanner</p>
+  <p>Admin / Teacher Scanner</p>
 
 </div>
 
@@ -267,9 +732,10 @@ button:disabled{
 
   <h3>🔐 Admin Login</h3>
 
-  <p>
-    Student QR me PIN nahi hota.
-    Admin/Teacher sirf yahan PIN dalega.
+  <p style="color:#94a3b8">
+
+    Admin PIN enter karke attendance scanner open karein.
+
   </p>
 
   <input
@@ -278,10 +744,8 @@ button:disabled{
     placeholder="Enter Admin PIN"
   >
 
-  <button
-    onclick="login()"
-  >
-    Login & Continue
+  <button onclick="login()">
+    🔐 Login & Continue
   </button>
 
   <div id="loginStatus"></div>
@@ -302,8 +766,10 @@ button:disabled{
     id="cameraStatus"
     class="status"
   >
+
     Camera start karne ke liye
-    button dabao.
+    Start Camera dabao.
+
   </div>
 
 
@@ -327,12 +793,30 @@ button:disabled{
   </button>
 
 
-  <button
-    class="red"
-    onclick="closeAttendance()"
-  >
-    🔒 Close Attendance & Mark Absent
-  </button>
+  <div class="close-section">
+
+    <div class="close-title">
+      ⚠️ Attendance Session
+    </div>
+
+    <p style="color:#94a3b8;font-size:14px">
+
+      Session complete hone ke baad hi
+      Close Attendance dabayein.
+
+      Isse sirf un students ko ABSENT kiya
+      jayega jinka aaj koi attendance record nahi hai.
+
+    </p>
+
+    <button
+      class="red"
+      onclick="closeAttendance()"
+    >
+      🔒 Close Attendance & Mark Absent
+    </button>
+
+  </div>
 
 </div>
 
@@ -357,16 +841,12 @@ button:disabled{
 <script>
 
 
-/* =========================================
-   CONFIG
-========================================= */
+/*************************************************
+ * CONFIG
+ *************************************************/
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbzvbXPrZjmKNNaq55w5zK7SEN8LAWLHUISyTB7mpG5kQyiHKNDtkoTZ2wxdbTdDpEt7/exec";
-
-/* =========================================
-   VARIABLES
-========================================= */
+"https://script.google.com/macros/s/AKfycbw53pUOmJLEHxIuhPrzVer8nGMnzpoxBnYVnMVN2nq5QhEpfrbPE3HZbgUg0aoH74gN/exec";
 
 let adminPin = "";
 
@@ -377,9 +857,9 @@ let scanning = false;
 let processing = false;
 
 
-/* =========================================
-   LOGIN
-========================================= */
+/*************************************************
+ * LOGIN
+ *************************************************/
 
 function login(){
 
@@ -394,24 +874,24 @@ function login(){
 
     showStatus(
       "loginStatus",
-      "Admin PIN enter karo.",
+      "❌ Admin PIN enter karo.",
       "error"
     );
 
     return;
+
   }
 
 
   showStatus(
     "loginStatus",
-    "PIN verify ho raha hai...",
+    "🔄 PIN verify ho raha hai...",
     "warning"
   );
 
 
   const callbackName =
-    "loginCallback_" +
-    Date.now();
+    "login_" + Date.now();
 
 
   window[callbackName] =
@@ -439,7 +919,7 @@ function login(){
 
         showStatus(
           "cameraStatus",
-          "✅ Login successful. Ab Start Camera dabao.",
+          "✅ Login successful. Camera start karo.",
           "success"
         );
 
@@ -456,52 +936,34 @@ function login(){
       }
 
 
-      delete window[callbackName];
+      delete window[
+        callbackName
+      ];
 
     };
 
 
-  const script =
-    document.createElement("script");
-
-
-  script.src =
-    API_URL +
-    "?action=login" +
-    "&pin=" +
-    encodeURIComponent(pin) +
-    "&callback=" +
-    callbackName;
-
-
-  script.onerror =
-    function(){
-
-      showStatus(
-        "loginStatus",
-        "❌ Apps Script server se connection nahi ho raha.",
-        "error"
-      );
-
-
-      delete window[callbackName];
-
-    };
-
-
-  document.body.appendChild(script);
+  jsonp(
+    "login",
+    {
+      pin:pin
+    },
+    callbackName
+  );
 
 }
 
 
-/* =========================================
-   START CAMERA
-========================================= */
+/*************************************************
+ * START CAMERA
+ *************************************************/
 
 async function startScanner(){
 
   if(scanning){
+
     return;
+
   }
 
 
@@ -536,12 +998,9 @@ async function startScanner(){
 
     const backCamera =
       cameras.find(
-        function(camera){
-
-          return /back|rear|environment/i
-            .test(camera.label);
-
-        }
+        camera =>
+          /back|rear|environment/i
+            .test(camera.label)
       );
 
 
@@ -577,7 +1036,7 @@ async function startScanner(){
               Math.min(
                 width,
                 height
-              ) * 0.65
+              ) * .65
             );
 
 
@@ -589,9 +1048,7 @@ async function startScanner(){
 
           };
 
-        },
-
-        aspectRatio:1.0
+        }
 
       },
 
@@ -605,9 +1062,9 @@ async function startScanner(){
       },
 
 
-      function(errorMessage){
+      function(){
 
-        // Normal QR scanning error
+        /* QR not detected */
 
       }
 
@@ -619,7 +1076,7 @@ async function startScanner(){
 
     showStatus(
       "cameraStatus",
-      "🟢 Camera ON — Student ka QR camera ke saamne lao.",
+      "🟢 CAMERA ON — QR scan karo.",
       "success"
     );
 
@@ -643,9 +1100,9 @@ async function startScanner(){
 }
 
 
-/* =========================================
-   STOP CAMERA
-========================================= */
+/*************************************************
+ * STOP CAMERA
+ *************************************************/
 
 async function stopScanner(){
 
@@ -681,64 +1138,62 @@ async function stopScanner(){
 
   showStatus(
     "cameraStatus",
-    "Camera stopped.",
+    "⛔ Camera stopped.",
     ""
   );
 
 }
 
 
-/* =========================================
-   PROCESS QR
-========================================= */
+/*************************************************
+ * PROCESS QR
+ *************************************************/
 
 function processQR(
   decodedText
 ){
 
   if(processing){
+
     return;
+
   }
 
 
   const studentId =
-    String(decodedText || "")
-      .trim();
+    String(
+      decodedText || ""
+    ).trim();
 
 
   if(!studentId){
+
     return;
+
   }
 
 
   processing = true;
 
 
-  if(
-    scanner &&
-    scanning
-  ){
+  try{
 
-    try{
-
-      scanner.pause(true);
-
-    }
-
-    catch(e){}
+    scanner.pause(true);
 
   }
+
+  catch(e){}
 
 
   showStatus(
     "cameraStatus",
-    "🔍 QR mil gaya! Student verify ho raha hai...",
+    "🔍 QR detected — student verify ho raha hai...",
     "warning"
   );
 
 
   const callbackName =
-    "attendanceCallback_" +
+    "attendance_" +
     Date.now();
 
 
@@ -770,7 +1225,7 @@ function processQR(
             catch(e){}
 
           },
-          2500
+          2200
         );
 
       }
@@ -783,164 +1238,31 @@ function processQR(
     };
 
 
-  const script =
-    document.createElement(
-      "script"
-    );
+  jsonp(
+    "attendance",
+    {
+      studentId:
+        studentId,
 
-
-  script.src =
-    API_URL +
-    "?action=attendance" +
-    "&studentId=" +
-    encodeURIComponent(
-      studentId
-    ) +
-    "&pin=" +
-    encodeURIComponent(
-      adminPin
-    ) +
-    "&callback=" +
-    callbackName;
-
-
-  script.onerror =
-    function(){
-
-      showStatus(
-        "cameraStatus",
-        "❌ Server response nahi mila.",
-        "error"
-      );
-
-
-      processing = false;
-
-
-      if(
-        scanner &&
-        scanning
-      ){
-
-        try{
-
-          scanner.resume();
-
-        }
-
-        catch(e){}
-
-      }
-
-    };
-
-
-  document.body
-    .appendChild(script);
-
-}
-
-
-/* =========================================
-   SHOW ATTENDANCE
-========================================= */
-
-function showAttendanceResult(
-  result
-){
-
-  document
-    .getElementById("resultCard")
-    .classList
-    .remove("hidden");
-
-
-  if(!result){
-
-    showStatus(
-      "cameraStatus",
-      "Invalid server response.",
-      "error"
-    );
-
-    return;
-  }
-
-
-  /* PRESENT */
-
-  if(result.ok){
-
-    showStatus(
-      "cameraStatus",
-      "✅ PRESENT — " +
-      result.student.name,
-      "success"
-    );
-
-
-    showStudent(
-      result.student,
-      result.date,
-      result.time,
-      "PRESENT"
-    );
-
-
-    return;
-
-  }
-
-
-  /* DUPLICATE */
-
-  if(result.duplicate){
-
-    showStatus(
-      "cameraStatus",
-      "⚠️ Aaj attendance already marked hai.",
-      "warning"
-    );
-
-
-    showStudent(
-      result.student,
-      result.date,
-      result.time,
-      "ALREADY PRESENT"
-    );
-
-
-    return;
-
-  }
-
-
-  /* ERROR */
-
-  showStatus(
-    "cameraStatus",
-    "❌ " +
-    (
-      result.message ||
-      "Student not found."
-    ),
-    "error"
+      pin:
+        adminPin
+    },
+    callbackName
   );
 
 }
 
 
-/* =========================================
-   CLOSE ATTENDANCE
-========================================= */
+/*************************************************
+ * CLOSE ATTENDANCE
+ *************************************************/
 
 function closeAttendance(){
 
   if(!adminPin){
 
     alert(
-      "Please login first."
+      "Pehle Admin Login karo."
     );
 
     return;
@@ -950,9 +1272,14 @@ function closeAttendance(){
 
   const confirmClose =
     confirm(
-      "Attendance close karna hai?\n\n" +
-      "Jo students scan nahi hue hain " +
-      "unko ABSENT mark kiya jayega."
+      "⚠️ Attendance close karni hai?\n\n" +
+
+      "PRESENT students ko change nahi kiya jayega.\n" +
+
+      "Sirf un students ko ABSENT kiya jayega " +
+      "jinka aaj attendance record nahi hai.\n\n" +
+
+      "Kya continue karein?"
     );
 
 
@@ -971,7 +1298,7 @@ function closeAttendance(){
 
 
   const callbackName =
-    "closeAttendanceCallback_" +
+    "close_" +
     Date.now();
 
 
@@ -985,16 +1312,26 @@ function closeAttendance(){
 
         showStatus(
           "cameraStatus",
-          "✅ Attendance Closed — " +
-          result.absentCount +
-          " students ABSENT.",
+
+          "✅ Attendance closed successfully. " +
+
+          "Present: " +
+          result.presentCount +
+
+          " | Absent: " +
+          result.absentCount,
+
           "success"
         );
 
 
         alert(
-          "Attendance Closed Successfully!\n\n" +
-          "Absent Students: " +
+          "Attendance Closed ✅\n\n" +
+
+          "Present: " +
+          result.presentCount +
+
+          "\nAbsent: " +
           result.absentCount
         );
 
@@ -1004,59 +1341,146 @@ function closeAttendance(){
 
         showStatus(
           "cameraStatus",
+
           "❌ " +
           (
-            result?.message ||
+            result.message ||
             "Attendance close nahi hui."
           ),
+
           "error"
         );
 
       }
 
 
-      delete window[callbackName];
+      delete window[
+        callbackName
+      ];
 
     };
 
 
-  const script =
-    document.createElement("script");
-
-
-  script.src =
-    API_URL +
-    "?action=closeAttendance" +
-    "&pin=" +
-    encodeURIComponent(adminPin) +
-    "&callback=" +
-    callbackName;
-
-
-  script.onerror =
-    function(){
-
-      showStatus(
-        "cameraStatus",
-        "❌ Server response nahi mila.",
-        "error"
-      );
-
-
-      delete window[callbackName];
-
-    };
-
-
-  document.body
-    .appendChild(script);
+  jsonp(
+    "closeAttendance",
+    {
+      pin:
+        adminPin
+    },
+    callbackName
+  );
 
 }
 
 
-/* =========================================
-   SHOW STUDENT
-========================================= */
+/*************************************************
+ * SHOW ATTENDANCE RESULT
+ *************************************************/
+
+function showAttendanceResult(
+  result
+){
+
+  document
+    .getElementById(
+      "resultCard"
+    )
+    .classList
+    .remove("hidden");
+
+
+  if(!result){
+
+    showStatus(
+      "cameraStatus",
+      "❌ Invalid server response.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  /* PRESENT */
+
+  if(result.ok){
+
+    showStatus(
+      "cameraStatus",
+
+      "✅ PRESENT — " +
+      result.student.name,
+
+      "success"
+    );
+
+
+    showStudent(
+      result.student,
+
+      result.date,
+
+      result.time,
+
+      "PRESENT"
+    );
+
+
+    return;
+
+  }
+
+
+  /* DUPLICATE */
+
+  if(result.duplicate){
+
+    showStatus(
+      "cameraStatus",
+
+      "⚠️ Attendance already marked today.",
+
+      "warning"
+    );
+
+
+    showStudent(
+      result.student,
+
+      result.date,
+
+      result.time,
+
+      "ALREADY PRESENT"
+    );
+
+
+    return;
+
+  }
+
+
+  /* ERROR */
+
+  showStatus(
+    "cameraStatus",
+
+    "❌ " +
+    (
+      result.message ||
+      "Student not found."
+    ),
+
+    "error"
+  );
+
+}
+
+
+/*************************************************
+ * SHOW STUDENT
+ *************************************************/
 
 function showStudent(
   student,
@@ -1071,56 +1495,41 @@ function showStudent(
     );
 
 
-  let photo = "";
+  let statusHtml;
 
 
   if(
-    student.photoUrl
+    status ===
+    "PRESENT"
   ){
 
-    photo = `
-
-      <img
-        src="${escapeHtml(
-          student.photoUrl
-        )}"
-        alt="Student Photo"
-        onerror="this.style.display='none';"
-      >
-
-    `;
-
-  }
-
-
-  let statusHTML;
-
-
-  if(
-    status === "PRESENT"
-  ){
-
-    statusHTML = `
-
-      <div class="present">
-        ✅ PRESENT
-      </div>
-
-    `;
+    statusHtml =
+      `<div class="present">
+        🟢 PRESENT
+      </div>`;
 
   }
 
   else{
 
-    statusHTML = `
-
-      <div class="already">
-        ⚠️ ALREADY PRESENT
-      </div>
-
-    `;
+    statusHtml =
+      `<div class="already">
+        🟡 ALREADY PRESENT
+      </div>`;
 
   }
+
+
+  const photo =
+    student.photoUrl
+      ? `
+        <img
+          src="${escapeHtml(student.photoUrl)}"
+          onerror="this.style.display='none';"
+          alt="Student Photo"
+        >
+      `
+      : "";
 
 
   result.innerHTML = `
@@ -1129,68 +1538,49 @@ function showStudent(
 
       ${photo}
 
-
       <div class="student-row">
-
-        <b>Name:</b>
-        ${escapeHtml(
-          student.name
-        )}
-
+        <span>Student ID</span>
+        <span>
+          ${escapeHtml(student.studentId)}
+        </span>
       </div>
 
-
       <div class="student-row">
-
-        <b>Student ID:</b>
-        ${escapeHtml(
-          student.studentId
-        )}
-
+        <span>Name</span>
+        <span>
+          ${escapeHtml(student.name)}
+        </span>
       </div>
 
-
       <div class="student-row">
-
-        <b>Class:</b>
-        ${escapeHtml(
-          student.studentClass
-        )}
-
+        <span>Class</span>
+        <span>
+          ${escapeHtml(student.studentClass)}
+        </span>
       </div>
 
-
       <div class="student-row">
-
-        <b>Roll No:</b>
-        ${escapeHtml(
-          student.rollNo
-        )}
-
+        <span>Roll No</span>
+        <span>
+          ${escapeHtml(student.rollNo)}
+        </span>
       </div>
 
-
       <div class="student-row">
-
-        <b>Date:</b>
-        ${escapeHtml(
-          date || "-"
-        )}
-
+        <span>Date</span>
+        <span>
+          ${escapeHtml(date)}
+        </span>
       </div>
 
-
       <div class="student-row">
-
-        <b>Time:</b>
-        ${escapeHtml(
-          time || "-"
-        )}
-
+        <span>Time</span>
+        <span>
+          ${escapeHtml(time)}
+        </span>
       </div>
 
-
-      ${statusHTML}
+      ${statusHtml}
 
     </div>
 
@@ -1199,24 +1589,108 @@ function showStudent(
 }
 
 
-/* =========================================
-   STATUS
-========================================= */
+/*************************************************
+ * JSONP
+ *************************************************/
+
+function jsonp(
+  action,
+  params,
+  callbackName
+){
+
+  let url =
+    API_URL +
+    "?action=" +
+    encodeURIComponent(
+      action
+    ) +
+    "&callback=" +
+    encodeURIComponent(
+      callbackName
+    );
+
+
+  Object.keys(
+    params
+  ).forEach(
+    function(key){
+
+      url +=
+        "&" +
+        encodeURIComponent(key) +
+        "=" +
+        encodeURIComponent(
+          params[key]
+        );
+
+    }
+  );
+
+
+  const script =
+    document.createElement(
+      "script"
+    );
+
+
+  script.src =
+    url;
+
+
+  script.onerror =
+    function(){
+
+      showStatus(
+        "cameraStatus",
+        "❌ Server se connection nahi hua.",
+        "error"
+      );
+
+
+      if(
+        window[callbackName]
+      ){
+
+        window[callbackName]({
+          ok:false,
+          message:
+            "Server connection failed."
+        });
+
+      }
+
+    };
+
+
+  document.body.appendChild(
+    script
+  );
+
+}
+
+
+/*************************************************
+ * STATUS
+ *************************************************/
 
 function showStatus(
-  id,
-  text,
+  elementId,
+  message,
   type
 ){
 
   const element =
     document.getElementById(
-      id
+      elementId
     );
 
 
-  element.textContent =
-    text;
+  if(!element){
+
+    return;
+
+  }
 
 
   element.className =
@@ -1225,50 +1699,48 @@ function showStatus(
       type || ""
     );
 
+
+  element.innerHTML =
+    message;
+
 }
 
 
-/* =========================================
-   ESCAPE HTML
-========================================= */
+/*************************************************
+ * ESCAPE HTML
+ *************************************************/
 
 function escapeHtml(
   value
 ){
 
   return String(
-    value || ""
+    value ?? ""
   )
-
-  .replace(
-    /&/g,
-    "&amp;"
-  )
-
-  .replace(
-    /</g,
-    "&lt;"
-  )
-
-  .replace(
-    />/g,
-    "&gt;"
-  )
-
-  .replace(
-    /"/g,
-    "&quot;"
-  )
-
-  .replace(
-    /'/g,
-    "&#039;"
-  );
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
 </script>
 
 </body>
-
 </html>
