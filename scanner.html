@@ -5,17 +5,12 @@
 
 <meta charset="UTF-8">
 
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1"
->
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-<title>QR Scanner</title>
+<title>QR Attendance Scanner</title>
 
-
-<script src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js">
-</script>
-
+<script src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 
 <style>
 
@@ -24,146 +19,231 @@
 }
 
 body{
-
   margin:0;
-
-  font-family:Arial;
-
+  font-family:Arial,sans-serif;
   background:#f3f6fb;
-
+  color:#111827;
 }
 
 .header{
-
   background:#111827;
-
   color:white;
-
   text-align:center;
+  padding:20px 15px;
+}
 
-  padding:18px;
+.header h2{
+  margin:0;
+  font-size:24px;
+}
 
+.header p{
+  margin:7px 0 0;
+  font-size:14px;
+  color:#d1d5db;
 }
 
 .container{
-
   width:94%;
-
-  max-width:600px;
-
-  margin:15px auto;
-
+  max-width:650px;
+  margin:18px auto;
 }
+
+/* CARD */
 
 .card{
-
   background:white;
-
-  padding:18px;
-
-  border-radius:16px;
-
-  box-shadow:0 5px 18px #0001;
-
+  padding:20px;
+  border-radius:18px;
+  margin-bottom:18px;
+  box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
 
-#reader{
+.card h3{
+  margin-top:0;
+  font-size:20px;
+}
 
+
+/* INPUT */
+
+input{
   width:100%;
+  height:52px;
+  padding:12px 14px;
+  border:1px solid #d1d5db;
+  border-radius:10px;
+  font-size:17px;
+  outline:none;
+}
 
-  margin-top:15px;
+input:focus{
+  border-color:#2563eb;
+}
 
+
+/* BUTTON */
+
+button{
+  width:100%;
+  min-height:52px;
+  margin-top:10px;
+  padding:12px;
+  border:0;
+  border-radius:10px;
+  background:#2563eb;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+}
+
+button:active{
+  transform:scale(.98);
+}
+
+button:disabled{
+  background:#9ca3af;
+}
+
+.gray{
+  background:#4b5563;
+}
+
+.red{
+  background:#dc2626;
+}
+
+.green{
+  background:#16a34a;
+}
+
+
+/* SCANNER */
+
+#reader{
+  width:100%;
+  margin:15px auto;
+  overflow:hidden;
+  border-radius:15px;
 }
 
 #reader video{
-
   width:100% !important;
-
-  border-radius:12px;
-
+  height:auto !important;
+  border-radius:15px;
 }
 
-button{
 
-  width:100%;
-
-  padding:15px;
-
-  margin-top:12px;
-
-  border:0;
-
-  border-radius:10px;
-
-  background:#2563eb;
-
-  color:white;
-
-  font-size:16px;
-
-}
+/* STATUS */
 
 .status{
-
-  padding:12px;
-
+  padding:14px;
   margin-top:12px;
-
   border-radius:10px;
-
   background:#f3f4f6;
-
+  text-align:center;
+  font-size:15px;
+  line-height:1.5;
 }
 
 .success{
-
   background:#dcfce7;
-
   color:#166534;
-
 }
 
 .error{
-
   background:#fee2e2;
-
   color:#991b1b;
-
 }
 
+.warning{
+  background:#fef3c7;
+  color:#92400e;
+}
+
+
+/* STUDENT */
+
 .student{
-
-  margin-top:15px;
-
-  padding:15px;
-
-  border-radius:12px;
-
+  margin-top:18px;
+  padding:18px;
   background:#f9fafb;
-
+  border-radius:14px;
 }
 
 .student img{
-
-  width:130px;
-
-  height:150px;
-
+  width:140px;
+  height:160px;
   object-fit:cover;
-
   display:block;
-
-  margin:auto;
-
-  border-radius:10px;
-
+  margin:0 auto 15px;
+  border-radius:12px;
+  background:#e5e7eb;
 }
 
-.row{
-
-  margin:9px 0;
-
+.student-row{
+  padding:9px 0;
+  border-bottom:1px solid #e5e7eb;
   font-size:16px;
+}
+
+.student-row:last-child{
+  border-bottom:0;
+}
+
+.present{
+  margin-top:15px;
+  padding:14px;
+  background:#dcfce7;
+  color:#166534;
+  text-align:center;
+  border-radius:10px;
+  font-weight:bold;
+  font-size:18px;
+}
+
+
+/* HIDDEN */
+
+.hidden{
+  display:none;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+  .header{
+    padding:16px 10px;
+  }
+
+  .header h2{
+    font-size:21px;
+  }
+
+  .container{
+    width:94%;
+    margin:12px auto;
+  }
+
+  .card{
+    padding:15px;
+    border-radius:15px;
+  }
+
+  .card h3{
+    font-size:18px;
+  }
+
+  #reader{
+    width:100%;
+  }
+
+  button{
+    min-height:54px;
+    font-size:16px;
+  }
 
 }
 
@@ -175,11 +255,13 @@ button{
 <body>
 
 
+<!-- HEADER -->
+
 <div class="header">
 
-<h2>📷 QR Attendance</h2>
+<h2>📷 QR Attendance System</h2>
 
-<div>Student Scanner</div>
+<p>Admin Scanner</p>
 
 </div>
 
@@ -187,18 +269,52 @@ button{
 <div class="container">
 
 
-<div class="card">
+<!-- ADMIN LOGIN -->
+
+<div
+  id="loginCard"
+  class="card"
+>
+
+<h3>🔐 Admin Login</h3>
+
+<p>
+Student QR me PIN nahi hota.
+Admin/Teacher sirf yahan PIN dalega.
+</p>
+
+<input
+  id="pin"
+  type="password"
+  placeholder="Enter Admin PIN"
+>
+
+<button
+  onclick="login()"
+>
+Login & Continue
+</button>
+
+<div id="loginStatus"></div>
+
+</div>
 
 
-<h3>Scan Student QR</h3>
+<!-- SCANNER -->
 
+<div
+  id="scannerCard"
+  class="card hidden"
+>
 
-<div id="status"
-     class="status">
+<h3>📷 Scan Student QR</h3>
 
+<div
+  id="cameraStatus"
+  class="status"
+>
 Camera start karne ke liye
 button dabao.
-
 </div>
 
 
@@ -207,27 +323,37 @@ button dabao.
 
 <button
   id="startBtn"
-  onclick="startScanner()">
-
+  onclick="startScanner()"
+>
 📷 Start Camera
-
 </button>
 
 
 <button
   id="stopBtn"
+  class="gray"
   onclick="stopScanner()"
-  style="background:#4b5563">
-
+>
 ⛔ Stop Camera
-
 </button>
 
 
-<div id="student"></div>
+</div>
 
+
+<!-- STUDENT RESULT -->
+
+<div
+  id="resultCard"
+  class="card hidden"
+>
+
+<h3>👤 Student Details</h3>
+
+<div id="result"></div>
 
 </div>
+
 
 </div>
 
@@ -235,33 +361,25 @@ button dabao.
 <script>
 
 
-/* =================================
+/* =========================================
    CONFIG
-================================= */
+========================================= */
 
 
 /*
-  YAHAN APNE APPS SCRIPT WEB APP
-  KA /exec URL DALO
+   YAHAN APNA APPS SCRIPT WEB APP /exec URL
+   DALO
 */
 
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbyCGawGoEMaGdwhjp-i8mHr1a2sBsaUmk6Bvt9oVS8gxaE6RwuVkbBaVdNVg7uqTRqG/exec";
+"https://script.google.com/macros/s/AKfycbyCGawGoEMaGdwhjp-i8mHr1a2sBsaUmk6Bvt9oVS8gxaE6RwuVkbBaVdNVg7uqTRqG/exec";
 
 
-/* =================================
-   PIN
-================================= */
+/* =========================================
+   VARIABLES
+========================================= */
 
-const urlParams =
-  new URLSearchParams(
-    window.location.search
-  );
-
-
-const PIN =
-  urlParams.get("pin") || "";
-
+let adminPin = "";
 
 let scanner = null;
 
@@ -270,14 +388,146 @@ let scanning = false;
 let processing = false;
 
 
-/* =================================
+/* =========================================
+   LOGIN
+========================================= */
+
+async function login(){
+
+  const pin =
+    document
+      .getElementById("pin")
+      .value
+      .trim();
+
+
+  if(!pin){
+
+    showStatus(
+      "loginStatus",
+      "Admin PIN enter karo.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  showStatus(
+    "loginStatus",
+    "PIN verify ho raha hai...",
+    "warning"
+  );
+
+
+  /*
+     Pehle Apps Script se PIN verify
+  */
+
+  const callbackName =
+    "loginCallback_" +
+    Date.now();
+
+
+  window[callbackName] =
+    function(result){
+
+      if(result && result.ok){
+
+        adminPin = pin;
+
+
+        document
+          .getElementById("loginCard")
+          .classList
+          .add("hidden");
+
+
+        document
+          .getElementById("scannerCard")
+          .classList
+          .remove("hidden");
+
+
+        showStatus(
+          "cameraStatus",
+          "✅ Login successful. Ab Start Camera dabao.",
+          "success"
+        );
+
+      }
+
+      else{
+
+        showStatus(
+          "loginStatus",
+          "❌ Invalid Admin PIN.",
+          "error"
+        );
+
+      }
+
+
+      delete window[callbackName];
+
+    };
+
+
+  const script =
+    document.createElement("script");
+
+
+  script.src =
+    API_URL +
+    "?action=login" +
+    "&pin=" +
+    encodeURIComponent(pin) +
+    "&callback=" +
+    callbackName;
+
+
+  script.onerror =
+    function(){
+
+      showStatus(
+        "loginStatus",
+        "❌ Apps Script server se connection nahi ho raha.",
+        "error"
+      );
+
+      delete window[callbackName];
+
+    };
+
+
+  document.body.appendChild(script);
+
+}
+
+
+/* =========================================
    START CAMERA
-================================= */
+========================================= */
 
 async function startScanner(){
 
-
   if(scanning){
+    return;
+  }
+
+
+  if(
+    API_URL.includes(
+      "PASTE_YOUR_DEPLOYMENT_ID"
+    )
+  ){
+
+    showStatus(
+      "cameraStatus",
+      "⚠️ Pehle scanner.html me Apps Script Web App URL set karo.",
+      "error"
+    );
 
     return;
 
@@ -286,14 +536,15 @@ async function startScanner(){
 
   try{
 
-
-    setStatus(
-      "Camera permission maang raha hai..."
+    showStatus(
+      "cameraStatus",
+      "📷 Camera detect ho raha hai...",
+      "warning"
     );
 
 
     /*
-      Camera list detect
+      Camera detect
     */
 
     const cameras =
@@ -306,14 +557,14 @@ async function startScanner(){
     ){
 
       throw new Error(
-        "Camera detect nahi hua."
+        "Camera nahi mila."
       );
 
     }
 
 
     /*
-      Back camera
+      Rear camera
     */
 
     let cameraId =
@@ -339,11 +590,19 @@ async function startScanner(){
     }
 
 
+    /*
+      Scanner create
+    */
+
     scanner =
       new Html5Qrcode(
         "reader"
       );
 
+
+    /*
+      Start
+    */
 
     await scanner.start(
 
@@ -351,7 +610,7 @@ async function startScanner(){
 
       {
 
-        fps:10,
+        fps:15,
 
         qrbox:function(
           width,
@@ -363,7 +622,7 @@ async function startScanner(){
               Math.min(
                 width,
                 height
-              ) * 0.70
+              ) * 0.65
             );
 
 
@@ -375,7 +634,9 @@ async function startScanner(){
 
           };
 
-        }
+        },
+
+        aspectRatio:1.0
 
       },
 
@@ -389,9 +650,13 @@ async function startScanner(){
       },
 
 
-      function(error){
+      function(errorMessage){
 
-        // QR not detected
+        /*
+          QR detect nahi hua.
+          Ye normal hai.
+        */
+
       }
 
     );
@@ -400,26 +665,25 @@ async function startScanner(){
     scanning = true;
 
 
-    setStatus(
-      "🟢 Camera ON — QR scan karo.",
+    showStatus(
+      "cameraStatus",
+      "🟢 Camera ON — Student ka QR camera ke saamne lao.",
       "success"
     );
 
-
   }
+
 
   catch(error){
 
     console.error(error);
 
 
-    setStatus(
-
+    showStatus(
+      "cameraStatus",
       "❌ Camera start nahi hua: " +
       error.message,
-
       "error"
-
     );
 
   }
@@ -427,12 +691,11 @@ async function startScanner(){
 }
 
 
-/* =================================
+/* =========================================
    STOP CAMERA
-================================= */
+========================================= */
 
 async function stopScanner(){
-
 
   if(
     !scanner ||
@@ -464,72 +727,111 @@ async function stopScanner(){
   scanning = false;
 
 
-  setStatus(
-    "Camera stopped."
+  showStatus(
+    "cameraStatus",
+    "Camera stopped.",
+    ""
   );
 
 }
 
 
-/* =================================
+/* =========================================
    PROCESS QR
-================================= */
+========================================= */
 
 function processQR(
-  studentId
+  decodedText
 ){
 
-
   if(processing){
-
     return;
+  }
 
+
+  /*
+     QR se sirf Student ID chahiye
+  */
+
+  const studentId =
+    String(decodedText || "")
+      .trim();
+
+
+  if(!studentId){
+    return;
   }
 
 
   processing = true;
 
 
-  studentId =
-    String(
-      studentId
-    ).trim();
+  /*
+     Camera temporarily pause
+  */
+
+  if(
+    scanner &&
+    scanning
+  ){
+
+    try{
+      scanner.pause(true);
+    }
+    catch(e){}
+  }
 
 
-  setStatus(
-    "Student verify ho raha hai..."
+  showStatus(
+    "cameraStatus",
+    "🔍 QR mil gaya! Student verify ho raha hai...",
+    "warning"
   );
 
 
   /*
-    JSONP callback
+     Student data API
   */
 
   const callbackName =
-    "qrCallback_" +
+    "attendanceCallback_" +
     Date.now();
 
 
   window[callbackName] =
     function(result){
 
-      try{
+      showAttendanceResult(
+        result
+      );
 
-        showResult(
-          result
+
+      processing = false;
+
+
+      if(
+        scanner &&
+        scanning
+      ){
+
+        setTimeout(
+          function(){
+
+            try{
+              scanner.resume();
+            }
+            catch(e){}
+
+          },
+          2500
         );
 
       }
 
-      finally{
 
-        processing = false;
-
-        delete window[
-          callbackName
-        ];
-
-      }
+      delete window[
+        callbackName
+      ];
 
     };
 
@@ -549,7 +851,7 @@ function processQR(
     ) +
     "&pin=" +
     encodeURIComponent(
-      PIN
+      adminPin
     ) +
     "&callback=" +
     callbackName;
@@ -558,12 +860,27 @@ function processQR(
   script.onerror =
     function(){
 
-      setStatus(
-        "Server se response nahi mila.",
+      showStatus(
+        "cameraStatus",
+        "❌ Server response nahi mila.",
         "error"
       );
 
+
       processing = false;
+
+
+      if(
+        scanner &&
+        scanning
+      ){
+
+        try{
+          scanner.resume();
+        }
+        catch(e){}
+
+      }
 
     };
 
@@ -572,62 +889,28 @@ function processQR(
     .body
     .appendChild(script);
 
-
-  /*
-    QR scanner ko thoda pause
-  */
-
-  setTimeout(
-    function(){
-
-      if(
-        scanner &&
-        scanning
-      ){
-
-        scanner.pause(
-          true
-        );
-
-      }
-
-    },
-    100
-  );
-
-
-  setTimeout(
-    function(){
-
-      if(
-        scanner &&
-        scanning
-      ){
-
-        scanner.resume();
-
-      }
-
-    },
-    1800
-  );
-
 }
 
 
-/* =================================
-   SHOW RESULT
-================================= */
+/* =========================================
+   SHOW ATTENDANCE
+========================================= */
 
-function showResult(
+function showAttendanceResult(
   result
 ){
+
+  document
+    .getElementById("resultCard")
+    .classList
+    .remove("hidden");
 
 
   if(!result){
 
-    setStatus(
-      "Invalid response.",
+    showStatus(
+      "cameraStatus",
+      "Invalid server response.",
       "error"
     );
 
@@ -636,9 +919,14 @@ function showResult(
   }
 
 
+  /*
+     SUCCESS
+  */
+
   if(result.ok){
 
-    setStatus(
+    showStatus(
+      "cameraStatus",
       "✅ PRESENT — " +
       result.student.name,
       "success"
@@ -652,16 +940,22 @@ function showResult(
       "PRESENT"
     );
 
+
     return;
 
   }
 
 
+  /*
+     DUPLICATE
+  */
+
   if(result.duplicate){
 
-    setStatus(
-      "⚠️ Attendance already marked.",
-      ""
+    showStatus(
+      "cameraStatus",
+      "⚠️ Aaj attendance already marked hai.",
+      "warning"
     );
 
 
@@ -672,24 +966,32 @@ function showResult(
       "ALREADY PRESENT"
     );
 
+
     return;
 
   }
 
 
-  setStatus(
+  /*
+     ERROR
+  */
+
+  showStatus(
+    "cameraStatus",
     "❌ " +
-    (result.message ||
-     "Student not found."),
+    (
+      result.message ||
+      "Student not found."
+    ),
     "error"
   );
 
 }
 
 
-/* =================================
+/* =========================================
    SHOW STUDENT
-================================= */
+========================================= */
 
 function showStudent(
   student,
@@ -698,112 +1000,118 @@ function showStudent(
   status
 ){
 
+  const result =
+    document.getElementById(
+      "result"
+    );
+
 
   const photo =
     student.photoUrl
-      ? `<img src="${escapeHtml(
-          student.photoUrl
-        )}">`
+      ? `
+        <img
+          src="${escapeHtml(
+            student.photoUrl
+          )}"
+          alt="Student Photo"
+        >
+      `
       : "";
 
 
-  document
-    .getElementById(
-      "student"
-    )
-    .innerHTML = `
+  result.innerHTML = `
 
-      <div class="student">
+    <div class="student">
 
-        ${photo}
+      ${photo}
 
-        <div class="row">
-          <b>Name:</b>
-          ${escapeHtml(
-            student.name
-          )}
-        </div>
-
-        <div class="row">
-          <b>Student ID:</b>
-          ${escapeHtml(
-            student.studentId
-          )}
-        </div>
-
-        <div class="row">
-          <b>Class:</b>
-          ${escapeHtml(
-            student.studentClass
-          )}
-        </div>
-
-        <div class="row">
-          <b>Roll No:</b>
-          ${escapeHtml(
-            student.rollNo
-          )}
-        </div>
-
-        <div class="row">
-          <b>Date:</b>
-          ${escapeHtml(
-            date || "-"
-          )}
-        </div>
-
-        <div class="row">
-          <b>Time:</b>
-          ${escapeHtml(
-            time || "-"
-          )}
-        </div>
-
-        <div class="row">
-          <b>Status:</b>
-          <strong>
-            ${escapeHtml(
-              status
-            )}
-          </strong>
-        </div>
-
+      <div class="student-row">
+        <b>Name:</b>
+        ${escapeHtml(
+          student.name
+        )}
       </div>
+
+      <div class="student-row">
+        <b>Student ID:</b>
+        ${escapeHtml(
+          student.studentId
+        )}
+      </div>
+
+      <div class="student-row">
+        <b>Class:</b>
+        ${escapeHtml(
+          student.studentClass
+        )}
+      </div>
+
+      <div class="student-row">
+        <b>Roll No:</b>
+        ${escapeHtml(
+          student.rollNo
+        )}
+      </div>
+
+      <div class="student-row">
+        <b>Date:</b>
+        ${escapeHtml(
+          date || "-"
+        )}
+      </div>
+
+      <div class="student-row">
+        <b>Time:</b>
+        ${escapeHtml(
+          time || "-"
+        )}
+      </div>
+
+      <div class="present">
+        ${status === "PRESENT"
+          ? "✅ PRESENT"
+          : "⚠️ ALREADY PRESENT"}
+      </div>
+
+    </div>
 
   `;
 
 }
 
 
-/* =================================
+/* =========================================
    STATUS
-================================= */
+========================================= */
 
-function setStatus(
+function showStatus(
+  id,
   text,
   type
 ){
 
-  const el =
+  const element =
     document.getElementById(
-      "status"
+      id
     );
 
 
-  el.textContent =
+  element.textContent =
     text;
 
 
-  el.className =
+  element.className =
     "status " +
-    (type || "");
+    (
+      type || ""
+    );
 
 }
 
 
-/* =================================
+/* =========================================
    ESCAPE HTML
-================================= */
+========================================= */
 
 function escapeHtml(
   value
@@ -812,22 +1120,27 @@ function escapeHtml(
   return String(
     value || ""
   )
+
   .replace(
     /&/g,
     "&amp;"
   )
+
   .replace(
     /</g,
     "&lt;"
   )
+
   .replace(
     />/g,
     "&gt;"
   )
+
   .replace(
     /"/g,
     "&quot;"
   )
+
   .replace(
     /'/g,
     "&#039;"
@@ -836,7 +1149,6 @@ function escapeHtml(
 }
 
 </script>
-
 
 </body>
 
